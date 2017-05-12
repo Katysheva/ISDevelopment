@@ -1,19 +1,17 @@
+		// var countryApp = angular.module('jsonApp', []);
+		// countryApp.controller('MainCtrl', function ($scope, $http){
+			
+		// });
 
-$(document).ready(function() {
-
-	$.getJSON('file.json', function(object) {
-		$('#title').text(object.title);
-		$('#description').text(object.description);
-        showFreelansers(object.freelansers);
-
-
-    });
-});
-function showFreelansers(freelansers){
-	for (freelanser of freelansers)
-	{
-		var string = '';
-		string+='<p>' + freelanser.name + ' is ' + freelanser.function + ' and he/she is ' + freelanser.age + ' years old. Now he/she is' + freelanser.status + '.</p>';
-		$('#freelansersList').append(string);
-	}
-};
+		(function () {
+			'use strict';
+			var app = angular.module('jsonApp', []);
+			app.controller('MainCtrl', [ 
+				'$scope', 
+				'$http',
+				function ($scope, $http) {
+					$http.get('freelancers.json').success(function(data) {
+						$scope.freelancers = data;
+					});
+				}])
+		})();
